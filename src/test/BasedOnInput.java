@@ -1,5 +1,7 @@
 package test;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Scanner;
 
 public class BasedOnInput {
@@ -7,15 +9,14 @@ public class BasedOnInput {
 		Scanner sc=new Scanner(System.in);
 		System.out.println("Enter Input to Print");
 		String msg=sc.nextLine().toLowerCase();
+		int n=9;
 		System.out.println();
 		System.out.println();
-		int range=nextNum(msg.length());
-		for(int k=0;k<range;k=k+15) {
-			for(int i=0;i<7;i++) {
-				for(int j=k;j<k+15;j++) {
-					if(j<msg.length()) {
-						printCharacter(i,msg.charAt(j));
-					}
+		List<String> words=nextNum(msg);
+		for(int k=0;k<words.size();k++) {
+			for(int i=0;i<n;i++) {
+				for(int j=0;j<words.get(k).length();j++) {
+					printInputCharacter(i,words.get(k).charAt(j),n);
 				}
 				System.out.println();
 			}
@@ -25,17 +26,52 @@ public class BasedOnInput {
 		
 	}
 	
-	public static int nextNum(int n) {
-		for(int i=n;;i++) {
-			if(i%15==0) {
-				return i;
+	public static List<String> nextNum(String msg) {
+		List<String> words = new ArrayList<>();
+		String[] ar = msg.split(" ");
+		String res="";
+		for(int i=0;i<ar.length;i++){
+			if(ar[i].length()>15){
+				System.out.println("word must contain 15 characters");
+				System.exit(0);
+			}else{
+				if((res.length()+ar[i].length())<=15){
+					if(i == 0){
+						res = ar[i];
+						continue;
+					}
+					res =res+" "+ar[i];
+				}else {
+					res = addSpaces(res);
+					words.add(res);
+					res = ar[i];
+				}
 			}
 		}
+		if(res.length() != 0){
+			words.add(addSpaces(res));
+		}
+		return words;
 	}
-	
-	public static void printCharacter(int i,char a) {
-		// TODO Auto-generated method stub
-		int n=7;
+
+	private static String addSpaces(String res) {
+		int remainingSpace = 15- res.length();
+		String spaces="";
+		for(int i=0;i<remainingSpace/2;i++){
+			spaces +=" ";
+		}
+		if(res.length() >= 14 && spaces.length() ==0){
+			res =" "+res;
+		}
+		if(remainingSpace%2 == 0){
+			res = spaces+res+spaces+" ";
+		}else{
+			res = spaces+res+spaces;
+		}
+		return res;
+	}
+
+	public static void printInputCharacter(int i,char a,int n) {
 		if(a=='a') {
 			for(int j=0;j<n;j++){
 				if(j==0 && i!=0 ||
