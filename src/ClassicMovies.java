@@ -32,13 +32,14 @@ public class ClassicMovies {
                         shortMovieName = movieName;
                     }
                 }
-            } catch (FileNotFoundException exception) {
+         } catch (FileNotFoundException exception) {
             System.out.println("Unable to fine movies.txt");
         } catch (Exception exception) {
             System.out.println("unable to extract data from move.txt");
         }
         printAndSaveData(shortMovieDuration, shortMovieName, longMovieDuration, longMovieName);
     }
+  }
     private static void printAndSaveData(int shortMovieDuration, String shortMovieName, int longMovieDuration, String longMovieName){
         if (shortMovieName != null) {
             String shortMovieDetails = shortMovieName + " " + shortMovieDuration;
