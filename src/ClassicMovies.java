@@ -32,6 +32,7 @@ public class ClassicMovies {
                         shortMovieName = movieName;
                     }
                 }
+            }
          } catch (FileNotFoundException exception) {
             System.out.println("Unable to fine movies.txt");
         } catch (Exception exception) {
