@@ -33,25 +33,24 @@ public class ClassicMovies {
                     }
                 }
             }
-         } catch (FileNotFoundException exception) {
+        } catch (FileNotFoundException exception) {
             System.out.println("Unable to fine movies.txt");
         } catch (Exception exception) {
             System.out.println("unable to extract data from move.txt");
         }
         printAndSaveData(shortMovieDuration, shortMovieName, longMovieDuration, longMovieName);
     }
-  }
-    private static void printAndSaveData(int shortMovieDuration, String shortMovieName, int longMovieDuration, String longMovieName){
+    private static void printAndSaveData(int shortMovieDuration, String shortMovieName, int longMovieDuration, String longMovieName) {
         if (shortMovieName != null) {
             String shortMovieDetails = shortMovieName + " " + shortMovieDuration;
             String longMovieDetails = longMovieName + " " + longMovieDuration;
             System.out.println(shortMovieDetails);
             System.out.println(longMovieDetails);
-            try(FileOutputStream fos = new FileOutputStream("MoviesOutPut.txt")) {
+            try (FileOutputStream fos = new FileOutputStream("MoviesOutPut.txt")) {
                 fos.write(shortMovieDetails.getBytes());
                 fos.write(System.lineSeparator().getBytes());
                 fos.write(longMovieDetails.getBytes());
-            } catch (IOException exception){
+            } catch (IOException exception) {
                 System.out.println("Unable to Write to File");
             }
         } else {
