@@ -3,38 +3,47 @@ package test;
 import java.util.Scanner;
 
 public class BasedOnInput {
-	public static void main(String[] args) {
-		Scanner sc=new Scanner(System.in);
-		System.out.println("Enter Input to Print");
-		String msg=sc.nextLine().toLowerCase();
-		System.out.println();
-		System.out.println();
-		int range=nextNum(msg.length());
-		for(int k=0;k<range;k=k+15) {
-			for(int i=0;i<7;i++) {
-				for(int j=k;j<k+15;j++) {
-					if(j<msg.length()) {
-						printCharacter(i,msg.charAt(j));
-					}
-				}
-				System.out.println();
-			}
-			System.out.println();
-			System.out.println();
-		}
-		
-	}
-	
-	public static int nextNum(int n) {
-		for(int i=n;;i++) {
-			if(i%15==0) {
-				return i;
-			}
-		}
-	}
-	
-	public static void printCharacter(int i,char a) {
-		// TODO Auto-generated method stub
+    private static final String EMPTY = " ";
+    public static void main(String[] args) {
+        Scanner sc=new Scanner(System.in);
+        System.out.println("Enter Input to Print");
+        String msg=sc.nextLine().toLowerCase();
+        System.out.println();
+        System.out.println();
+        String[] s = msg.split(EMPTY);
+        StringBuilder res = new StringBuilder();
+        for (String value : s) {
+            String temp = res + value;
+            if (temp.length() > 20) {
+                printData(res.toString().trim());
+                res = new StringBuilder(value);
+            } else {
+                res.append(EMPTY).append(value);
+            }
+        }
+        if(res.length() > 0 ) {
+            printData(res.toString().trim());
+        }
+    }
+    private static void printData(String message) {
+        int n=8;
+        for(int i=0;i<n;i++) {
+            for(int j=0;j<message.length();j++) {
+                if(message.charAt(j) =='.' && i== n-1) {
+                    System.out.print("*");
+                    continue;
+                } else {
+                    System.out.print(" ");
+                }
+                printCharacter(i,message.charAt(j), n);
+            }
+            System.out.println();
+        }
+        System.out.println();
+        System.out.println();
+    }
+
+    public static void printCharacter(int i,char a, int n) {
 		int n=7;
 		if(a=='a') {
 			for(int j=0;j<n;j++){
